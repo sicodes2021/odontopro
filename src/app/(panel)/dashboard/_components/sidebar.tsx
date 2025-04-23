@@ -14,12 +14,12 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet"  
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/sheet"
 import { Banknote, CalendarCheck2, ChevronLeft, ChevronRight, Folder, List, Settings } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import LogoImg from '../../../../../public/logo-odonto.png'
+import { Button } from '@/components/ui/button';
 
 export function SidebarDashboard({ children }: { children: React.ReactNode }) {
 
@@ -147,7 +147,12 @@ export function SidebarDashboard({ children }: { children: React.ReactNode }) {
                     <Sheet>
                         <div className='flex items-center gap-4'>
                             <SheetTrigger asChild>
-                                <Button variant="outline" size="icon" className='md:hidden'>
+                                <Button 
+                                    variant="outline" 
+                                    size="icon" 
+                                    className='md:hidden'
+                                    onClick={() => setIsCollapsed(false) }
+                                >
                                     <List className='w-5 h-5'/>
                                 </Button>
                             </SheetTrigger>
