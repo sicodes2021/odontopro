@@ -41,15 +41,30 @@ import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 import imgTest from '../../../../../../public/foto1.png'
+import { Prisma } from '@prisma/client'
 
 
+type UserWithSubscription = Prisma.Payload<{
+    include: {
+        subscription: true
+    }
+}>
 
-export function ProfileContent() {
+interface ProfileContentProps{
+    user: UserWithSubscription
+}
 
-    const [selectedHours, setSelectedHours] = useState<string[]>([]);
+export function ProfileContent({ user }: ProfileContentProps) {
+    const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? []);
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-    const form = useProfileForm();
+    const form = useProfileForm({
+        name: user.name,
+        address: user.address,
+        phone: user.phone,
+        status: user.status,
+        timeZone: user.timeZone
+    });
 
     function generateTimeSlots(): string[] {
         const hours: string[] = [];
