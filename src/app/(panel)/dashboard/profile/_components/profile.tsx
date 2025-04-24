@@ -14,7 +14,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage
+    FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
@@ -22,11 +22,25 @@ import {
     SelectContent,
     SelectItem,
     SelectTrigger,
-    SelectValue
-} from "@/components/ui/select"
+    SelectValue,
+} from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import Image from 'next/image'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog'
+
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
+
 import imgTest from '../../../../../../public/foto1.png'
+
+
 
 export function ProfileContent() {
 
@@ -65,6 +79,7 @@ export function ProfileContent() {
                                                     placeholder='Digite o nome da clinica...'
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -83,6 +98,7 @@ export function ProfileContent() {
                                                     placeholder='Digite o endereço da clinica...'
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -101,6 +117,7 @@ export function ProfileContent() {
                                                     placeholder='Digite o telefone...'
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -130,6 +147,42 @@ export function ProfileContent() {
                                         </FormItem>
                                     )}
                                 />
+
+                                <div className='space-y-2'>
+                                    <Label className='font-semibold'>
+                                        Configurar horários da clinica
+                                    </Label>
+
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <Button 
+                                                variant="outline"
+                                                className='w-full justify-between'
+                                            >
+                                                Clique aqui para selecionar horários
+                                                <ArrowRight className='w-5 h-5' />
+                                            </Button>
+                                        </DialogTrigger>
+
+                                        <DialogContent>
+                                            <DialogHeader>
+                                                <DialogTitle>Horários da clinica</DialogTitle>
+                                                <DialogDescription>
+                                                    Selecione abaixo os horários de funcionamento da clinica:
+                                                </DialogDescription>
+                                            </DialogHeader>
+
+                                            <section className='py-4'>
+                                                <p className='text-sm text-muted-foreground'>
+                                                    Clique nos horários abaixo para marcar ou desmarcar:
+                                                </p>
+                                                <div>
+                                                    ...
+                                                </div>
+                                            </section>
+                                        </DialogContent>
+                                    </Dialog>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
