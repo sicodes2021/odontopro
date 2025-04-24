@@ -46,7 +46,8 @@ import imgTest from '../../../../../../public/foto1.png'
 
 export function ProfileContent() {
 
-    const [selectedHours, setSelectedHours] = useState<string[]>([])
+    const [selectedHours, setSelectedHours] = useState<string[]>([]);
+    const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
     const form = useProfileForm();
 
@@ -177,7 +178,7 @@ export function ProfileContent() {
                                         Configurar horários da clinica
                                     </Label>
 
-                                    <Dialog>
+                                    <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
                                         <DialogTrigger asChild>
                                             <Button 
                                                 variant="outline"
@@ -213,6 +214,13 @@ export function ProfileContent() {
                                                     ))}
                                                 </div>
                                             </section>
+
+                                            <Button 
+                                                className='w-full' 
+                                                onClick={ () => setDialogIsOpen(false) }
+                                            >
+                                                Salvar horários
+                                            </Button>
                                         </DialogContent>
                                     </Dialog>
                                 </div>
