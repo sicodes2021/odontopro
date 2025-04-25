@@ -2,12 +2,7 @@
 
 import { useState } from 'react'
 import { ProfileFormData, useProfileForm } from './profile-form'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle
-} from '@/components/ui/card'
+import { Card,  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     Form,
     FormControl,
@@ -38,18 +33,33 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 import imgTest from '../../../../../../public/foto1.png'
+import { cn } from '@/lib/utils'
+import { Prisma } from '../../../../../../generated/prisma/client'
 
 
+type UserWithSubscription = Prisma.UserGetPayload<{
+    include: {
+        subscription: true
+    }
+}>
 
-export function ProfileContent() {
+interface ProfileContentProps{
+    user: UserWithSubscription
+}
 
-    const [selectedHours, setSelectedHours] = useState<string[]>([]);
+export function ProfileContent({ user }: ProfileContentProps) {
+    const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? []);
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-    const form = useProfileForm();
+    const form = useProfileForm({
+        name: user.name,
+        address: user.address,
+        phone: user.phone,
+        status: user.status,
+        timeZone: user.timeZone
+    });
 
     function generateTimeSlots(): string[] {
         const hours: string[] = [];
@@ -101,7 +111,7 @@ export function ProfileContent() {
                             <div className='flex justify-center'>
                                 <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
                                     <Image
-                                        src={imgTest}
+                                        src={user.image ? user.image : imgTest}
                                         alt="Foto da clinica"
                                         fill
                                         className='object-cover'
