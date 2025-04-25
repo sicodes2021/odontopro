@@ -2,12 +2,7 @@
 
 import { useState } from 'react'
 import { useProfileForm } from './profile-form'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle
-} from '@/components/ui/card'
+import { Card,  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     Form,
     FormControl,
@@ -38,13 +33,13 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 import imgTest from '../../../../../../public/foto1.png'
-import { Prisma } from '@prisma/client'
+import { cn } from '@/lib/utils'
+import { Prisma } from '../../../../../../generated/prisma/client'
 
 
-type UserWithSubscription = Prisma.Payload<{
+type UserWithSubscription = Prisma.UserGetPayload<{
     include: {
         subscription: true
     }
