@@ -18,7 +18,7 @@ const profileSchema = z.object({
     timeZone: z.string().min(1, { message: "O time zone é obrigatório" }),
 })
 
-type ProfileFormData = z.infer<typeof profileSchema>;
+export type ProfileFormData = z.infer<typeof profileSchema>;
 
 export function useProfileForm({ name, address, phone, status, timeZone }: UseProfileFormProps) {
     return useForm<ProfileFormData>({

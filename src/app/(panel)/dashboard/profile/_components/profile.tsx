@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { useProfileForm } from './profile-form'
+import { ProfileFormData, useProfileForm } from './profile-form'
 import { Card,  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     Form,
@@ -92,10 +92,17 @@ export function ProfileContent({ user }: ProfileContentProps) {
         zone.startsWith("America/Boa_Vista")
     );
 
+    async function onSubmit(values: ProfileFormData) {
+        const profileData = {
+            ...values,
+            times: selectedHours
+        }
+    }
+
     return (
         <div className='mx-auto'>
             <Form {...form}>
-                <form>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <Card>
                         <CardHeader>
                             <CardTitle>Meu Perfil</CardTitle>
@@ -104,7 +111,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                             <div className='flex justify-center'>
                                 <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
                                     <Image
-                                        src={imgTest}
+                                        src={user.image ? user.image : imgTest}
                                         alt="Foto da clinica"
                                         fill
                                         className='object-cover'
