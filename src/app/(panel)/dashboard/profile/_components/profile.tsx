@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { useProfileForm } from './profile-form'
+import { ProfileFormData, useProfileForm } from './profile-form'
 import { Card,  CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     Form,
@@ -37,6 +37,7 @@ import { ArrowRight } from 'lucide-react'
 import imgTest from '../../../../../../public/foto1.png'
 import { cn } from '@/lib/utils'
 import { Prisma } from '../../../../../../generated/prisma/client'
+import { updateProfile } from '../_actions/update-profile'
 
 
 type UserWithSubscription = Prisma.UserGetPayload<{
@@ -92,10 +93,27 @@ export function ProfileContent({ user }: ProfileContentProps) {
         zone.startsWith("America/Boa_Vista")
     );
 
+    async function onSubmit(values: ProfileFormData) {
+
+        const profileData = {
+            ...values,
+            times: selectedHours
+        }
+
+        const response = await updateProfile({
+            name: values.name,
+            address: values.address,
+            status: values.status === 'active' ? true : false,
+            phone: values.phone,
+            timeZone: values.timeZone,
+            times: selectedHours || []
+        })
+    }
+
     return (
         <div className='mx-auto'>
             <Form {...form}>
-                <form>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <Card>
                         <CardHeader>
                             <CardTitle>Meu Perfil</CardTitle>
