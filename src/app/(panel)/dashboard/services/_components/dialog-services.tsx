@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { convertRealToCents } from '@/utils/convertCurrency'
 
 export function DialogServices() {
 
@@ -20,6 +21,10 @@ export function DialogServices() {
 
 
     async function onSubmit(values: DialogServiceFormData) {
+
+        const priceInCents = convertRealToCents(values.price)
+        
+        console.log(priceInCents)
 
     }
 
@@ -55,7 +60,7 @@ export function DialogServices() {
                         <FormField 
                             control={form.control}
                             name="name"
-                            render={ (field) => (
+                            render={({ field }) => (
                                 <FormItem className="my-2">
                                     <FormLabel className="font-semibold">
                                         Nome do serviço:
@@ -74,7 +79,7 @@ export function DialogServices() {
                         <FormField 
                             control={form.control}
                             name="price"
-                            render={ (field) => (
+                            render={({ field }) => (
                                 <FormItem className="my-2">
                                     <FormLabel className="font-semibold">
                                         Valor do serviço:
@@ -97,7 +102,7 @@ export function DialogServices() {
                         <FormField 
                             control={form.control}
                             name="hours"
-                            render={ (field) => (
+                            render={({ field }) => (
                                 <FormItem className="my-2">
                                     <FormLabel className="font-semibold">
                                         Horas:
@@ -118,7 +123,7 @@ export function DialogServices() {
                         <FormField 
                             control={form.control}
                             name="minutes"
-                            render={ (field) => (
+                            render={({ field }) => (
                                 <FormItem className="my-2">
                                     <FormLabel className="font-semibold">
                                         Minutos:
