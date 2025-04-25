@@ -1,6 +1,6 @@
 import getSession from '@/lib/getSession'
 import { redirect } from 'next/navigation'
-import { ServicesContent } from './_components/service-content';
+import { ServicesContent } from './_components/services-content';
 
 export default async function Services() {
 
