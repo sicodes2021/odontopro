@@ -94,7 +94,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
     );
 
     async function onSubmit(values: ProfileFormData) {
-
         const profileData = {
             ...values,
             times: selectedHours
@@ -122,7 +121,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                             <div className='flex justify-center'>
                                 <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
                                     <Image
-                                        src={imgTest}
+                                        src={user.image ? user.image : imgTest}
                                         alt="Foto da clinica"
                                         fill
                                         className='object-cover'
