@@ -14,6 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { convertRealToCents } from '@/utils/convertCurrency'
+import { createNewService } from '../_actions/create-services'
 
 export function DialogServices() {
 
@@ -23,8 +24,17 @@ export function DialogServices() {
     async function onSubmit(values: DialogServiceFormData) {
 
         const priceInCents = convertRealToCents(values.price)
-        
-        console.log(priceInCents)
+        const hours = parseInt(values.hours) || 0;
+        const minutes = parseInt(values.minutes) || 0;
+
+        // Converter as horas e minutos para duração total em minutos.
+        const duration = (hours * 60) + minutes;
+
+        const response = await createNewService({
+            name: values.name,
+            price: priceInCents,
+            duration: duration
+        })
 
     }
 
