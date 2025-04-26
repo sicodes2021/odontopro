@@ -46,7 +46,7 @@ export async function createNewService(formData: FormSchema) {
 
     } catch(err) {
         return {
-            error: "Falha ao cadastrar serviço"
+            error: "Erro ao cadastrar serviço"
         }
     }
 }
