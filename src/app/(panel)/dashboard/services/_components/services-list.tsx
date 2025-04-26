@@ -32,7 +32,11 @@ export function ServicesList() {
                         </DialogTrigger>
 
                         <DialogContent>
-                            <DialogServices/>
+                            <DialogServices 
+                                closeModal={() => {
+                                    setIsDialogOpen(false);
+                                }}
+                            />
                         </DialogContent>
                     </CardHeader>
                 </Card>
