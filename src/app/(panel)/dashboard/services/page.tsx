@@ -11,7 +11,7 @@ export default async function Services() {
     }
 
     
-    return(
+    return (
         <ServicesContent userId={session.user?.id!} />
     )
 }
