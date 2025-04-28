@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { convertRealToCents } from '@/utils/convertCurrency'
 import { createNewService } from '../_actions/create-services'
+import { updateService } from '../_actions/update-services'
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
 
@@ -87,6 +88,22 @@ export function DialogServices({ closeModal, serviceId, initialValues }: DialogS
             duration: number
     }) {
 
+        const response =  await updateService({
+            serviceId: serviceId,
+            name: name,
+            price: priceInCents,
+            duration: duration
+        })
+
+        setLoading(false);
+
+        if(response.error) {
+            toast.error(response.error);
+            return;
+        }
+
+        toast.success(response.data);
+        handleCloseModal();
     }
 
     function handleCloseModal() {
