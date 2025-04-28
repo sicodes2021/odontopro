@@ -46,6 +46,17 @@ export function DialogServices({ closeModal, serviceId, initialValues }: DialogS
         // Converter as horas e minutos para duração total em minutos.
         const duration = (hours * 60) + minutes;
 
+        if(serviceId) {
+            await editServiceById({
+                serviceId: serviceId,
+                name: values.name,
+                priceInCents: priceInCents,
+                duration: duration
+            })
+
+            return;
+        }
+
         const response = await createNewService({
             name: values.name,
             price: priceInCents,
@@ -62,6 +73,19 @@ export function DialogServices({ closeModal, serviceId, initialValues }: DialogS
         toast.success("Serviço cadastrado com sucesso!");
         handleCloseModal();
         router.refresh();
+
+    }
+
+    async function editServiceById({ 
+        serviceId, 
+        name, 
+        priceInCents, 
+        duration }: { 
+            serviceId: string, 
+            name: string, 
+            priceInCents: number, 
+            duration: number
+    }) {
 
     }
 
@@ -189,7 +213,7 @@ export function DialogServices({ closeModal, serviceId, initialValues }: DialogS
                         className="w-full font-semibold text-white"
                         disabled={loading}
                     >
-                        {loading ? "Carregando..." : "Adicionar serviço"}
+                        {loading ? "Carregando..." : `${serviceId ? "Atualizar serviço" : "Cadastrar serviço"}`}
                     </Button>
                 </form>
             </Form>
