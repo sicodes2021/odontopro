@@ -21,11 +21,18 @@ import { useRouter } from 'next/navigation'
 
 interface DialogServiceProps {
     closeModal: () => void;
+    serviceId?: string;
+    initialValues?: {
+        name: string;
+        price: string;
+        hours: string;
+        minutes: string;
+    }
 }
 
-export function DialogServices({ closeModal }: DialogServiceProps) {
+export function DialogServices({ closeModal, serviceId, initialValues }: DialogServiceProps) {
 
-    const form = useDialogServiceForm();
+    const form = useDialogServiceForm({ initialValues: initialValues });
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
